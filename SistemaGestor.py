@@ -467,21 +467,23 @@ def chooseFromDMLMenu():
         print("\nError: invalid option. Please, try again. \n" + str(theError))
         chooseFromDMLMenu()
 
-availableCommands = {"CreateTable {Name, Attributes, DataTypes, Constraints}",
+availableCommands = {"CreateTable {TableName, ColumnName1-DataType1-Constraint1, ... }",
+                    "RenameTable {TableName, NewTableName}",
+                    "TruncateTable {TableName1-TableName2- ... }",
+                    "DropTable {TableName1-TableName2- ... }",
+                    "AddColumn {TableName, ColumnName, DataType}",
+                    "RenameColumn {TableName, ColumnName, NewColumnName}",
+                    "RemoveColumn {TableName, ColumnName}",
+                    "CreateIndex {IndexName, TableName, ColumnName}",
+                    "RenameIndex {IndexName, NewIndexName}",
+                    "DropIndex {IndexName1-IndexName2- ... }",
+                    "CreateFunction {FilePath}",
+                    "RenameFunction {FunctionName, ParameterType, NewFunctionName}",
+                    "DropFunction {FunctionName, ParameterTypes}",
+                    "Select {Column1-Column2- ... ,Table,WhereColumn,Value}",
+                    "Insert {TableName, Value1-Value2- ... }",
                     "Update {TableName, ColumnName, NewValue, ReferenceColumn, OldValue}",
-                    "Select {Columns,Table,WhereColumn,Value}",
-                    "Insert {TableName, Values}",
-                    "Delete {TableName, ColumnName, Value",
-                     "AddColumn {TableName, ColumnName, DataType}",
-                     "RemoveColumn {TableName, ColumnName}",
-                     "RenameColumn {TableName, ColumnName, NewColumnName}",
-                     "RenameTable {TableName, NewTableName}",
-                     "DropTable {TableNames}",
-                     "TruncateTable {TableNames}",
-                     "CreateIndex {IndexName, TableName, ColumnName}", "DropIndex {IndexNames}",
-                     "RenameIndex {IndexName, NewIndexName}",
-                     "CreateFunction {Path}", "RenameFunction {FunctionName, ParameterType, NewFunctionName}",
-                     "DropFunction {FunctionName, ParameterTypes}"}
+                    "Delete {TableName, ColumnName, Value}"}
 
 def showFunctions():
     functionNumber = 1
@@ -828,12 +830,15 @@ fuctionDict = {'CreateTable':CreateTable, 'Update':Update, 'Select':Select, 'Ins
 def typeCommand():
         while True:
             theStatement = input("\nType /quit to close the Database Administrator. "
+                                 "\nType /back to return to the previous menu. "
                                  "\nType /help to see all available functions. "
                                  "\nWarning: Separate parameters with a comma and multiple parameter values with a dash."
                                  "\nCommand:")
             checkToQuit(theStatement)
             if theStatement == "/help":
                 showFunctions()
+            elif theStatement == "/back":
+                chooseFromMainMenu()
             else:
                 theFunction = theStatement.partition("{")[0].strip()
                 theParameters = theStatement.partition('{')[2][:-1]
