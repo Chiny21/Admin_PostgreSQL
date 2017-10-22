@@ -24,8 +24,9 @@ def connectToDatabase():
         os.system('cls')
         print("Welcome!")
         chooseFromMainMenu()
-    except psycopg2.OperationalError:
-        print("Something went wrong connecting to the dabase. Make sure the information you entered is correct. Please, try again.")
+    except psycopg2.OperationalError as theError:
+        print("Something went wrong connecting to the dabase. Make sure the information you entered is correct. "
+              "Please, try again. \n" + str(theError))
         connectToDatabase()
 
 
@@ -56,8 +57,8 @@ def createTableFromMenu():
         databaseConnection.commit()
         print("Success! Table created.")
         chooseFromCreateMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + theError)
         createTableFromMenu()
 
 def createFunctionFromMenu():
@@ -69,8 +70,8 @@ def createFunctionFromMenu():
         databaseConnection.commit()
         print("Success! Function created.")
         chooseFromCreateMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + theError)
         chooseFromCreateMenu()
 
 def createIndexFromMenu():
@@ -83,8 +84,8 @@ def createIndexFromMenu():
         databaseConnection.commit()
         print("Success! Index created.")
         chooseFromCreateMenu
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + theError)
         chooseFromCreateMenu()
 
 theCreateMenu = "\nType /back to return to the previous menu. \nCreate Menu: \n1. TABLE \n2. FUNCTION " \
@@ -101,8 +102,8 @@ def chooseFromCreateMenu():
                 '2': createFunctionFromMenu,
                 '3': createIndexFromMenu
             }[theInput]()
-    except KeyError:
-        print("\nError: invalid option. Please, try again.")
+    except KeyError as theError:
+        print("\nError: invalid option. Please, try again. \n" + theError)
         chooseFromDDLMenu()
 
 def addColumnFromMenu():
@@ -115,8 +116,8 @@ def addColumnFromMenu():
         databaseConnection.commit()
         print("Success! Column added.")
         alterTableFromMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + theError)
         alterTableFromMenu()
 
 def removeColumnFromMenu():
@@ -128,8 +129,8 @@ def removeColumnFromMenu():
         databaseConnection.commit()
         print("Success! Column removed.")
         alterTableFromMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + theError)
         alterTableFromMenu()
 
 def renameColumnFromMenu():
@@ -142,8 +143,8 @@ def renameColumnFromMenu():
         databaseConnection.commit()
         print("Success! Column renamed.")
         alterTableFromMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         alterTableFromMenu()
 
 def renameTableFromMenu():
@@ -155,8 +156,8 @@ def renameTableFromMenu():
         databaseConnection.commit()
         print("Success! Table renamed.")
         alterTableFromMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         alterTableFromMenu()
 
 def alterTableFromMenu():
@@ -172,8 +173,8 @@ def alterTableFromMenu():
                 '3': renameColumnFromMenu,
                 '4': renameTableFromMenu
             }[theInput]()
-    except KeyError:
-        print("\nError: invalid option. Please, try again.")
+    except KeyError as theError:
+        print("\nError: invalid option. Please, try again. \n" + str(theError))
         chooseFromDDLMenu()
 
 def RenameFunctionFromMenu():
@@ -188,8 +189,8 @@ def RenameFunctionFromMenu():
         databaseConnection.commit()
         print("Success! Function renamed.")
         chooseFromAlterMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         chooseFromAlterMenu()
 
 def RenameIndexFromMenu():
@@ -201,8 +202,8 @@ def RenameIndexFromMenu():
         databaseConnection.commit()
         print("Success! Index renamed.")
         chooseFromAlterMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         chooseFromAlterMenu()
 
 def chooseFromAlterMenu():
@@ -216,8 +217,8 @@ def chooseFromAlterMenu():
                 '2': RenameFunctionFromMenu,
                 '3': RenameIndexFromMenu
             }[theInput]()
-    except KeyError:
-        print("\nError: invalid option. Please, try again.")
+    except KeyError as theError:
+        print("\nError: invalid option. Please, try again. \n" + str(theError))
         chooseFromDDLMenu()
 
 def dropTableFromMenu():
@@ -230,8 +231,8 @@ def dropTableFromMenu():
         databaseConnection.commit()
         print("Success! Table dropped.")
         chooseFromDropMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         chooseFromDropMenu()
 
 def dropFunctionFromMenu():
@@ -245,8 +246,8 @@ def dropFunctionFromMenu():
         databaseConnection.commit()
         print("Success! Function dropped.")
         chooseFromDropMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         chooseFromDropMenu()
 
 def dropIndexFromMenu():
@@ -259,8 +260,8 @@ def dropIndexFromMenu():
         databaseConnection.commit()
         print("Success! Index dropped.")
         chooseFromDropMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         chooseFromDropMenu()
 
 def chooseFromDropMenu():
@@ -274,8 +275,8 @@ def chooseFromDropMenu():
                 '2': dropFunctionFromMenu,
                 '3': dropIndexFromMenu
             }[theInput]()
-    except KeyError:
-        print("\nError: invalid option. Please, try again.")
+    except KeyError as theError:
+        print("\nError: invalid option. Please, try again. \n" + str(theError))
         chooseFromDDLMenu()
 
 def truncateTableFromMenu():
@@ -288,8 +289,8 @@ def truncateTableFromMenu():
         databaseConnection.commit()
         print("Success! Table truncated.")
         chooseFromDDLMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         chooseFromDDLMenu()
 
 theDDLMenu = "\nType /back to return to the previous menu. \nDDL Menu: \n1. CREATE \n2. ALTER \n3. DROP " \
@@ -307,8 +308,8 @@ def chooseFromDDLMenu():
                 '3': chooseFromDropMenu,
                 '4': truncateTableFromMenu
             }[theInput]()
-    except KeyError:
-        print("\nError: invalid option. Please, try again.")
+    except KeyError as theError:
+        print("\nError: invalid option. Please, try again. \n" + str(theError))
         chooseFromDDLMenu()
 
 def showTableColumns(TableName):
@@ -364,8 +365,8 @@ def selectFromMenu():
     except KeyError:
         print("Error: Invalid option selected. Please, start again.")
         selectFromMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: Invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: Invalid data entered. Please, try again. \n" + str(theError))
         selectFromMenu()
 
 def insertFromMenu():
@@ -393,8 +394,8 @@ def insertFromMenu():
     except KeyError:
         print("Error: Invalid option selected. Please, start again.")
         insertFromMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: Invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: Invalid data entered. Please, try again. \n" + str(theError))
         insertFromMenu()
 
 def updateFromMenu():
@@ -410,8 +411,8 @@ def updateFromMenu():
         databaseConnection.commit()
         print("Success! Values updated.")
         chooseFromDMLMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         updateFromMenu()
 
 def deleteFromMenu():
@@ -425,8 +426,8 @@ def deleteFromMenu():
         databaseConnection.commit()
         print("Success! Values deleted.")
         chooseFromDMLMenu()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         deleteFromMenu()
 
 theDMLMenu = "\nType /back to return to the previous menu. \nDML Menu: \n1. SELECT \n2. INSERT \n3. UPDATE " \
@@ -444,8 +445,8 @@ def chooseFromDMLMenu():
                 '3': updateFromMenu,
                 '4': deleteFromMenu
             }[theInput]()
-    except KeyError:
-        print("\nError: invalid option. Please, try again.")
+    except KeyError as theError:
+        print("\nError: invalid option. Please, try again. \n" + str(theError))
         chooseFromDMLMenu()
 
 availableCommands = {"CreateTable {Name, Attributes, DataTypes, Constraints}",
@@ -484,11 +485,11 @@ def CreateTable(Parameters):
         databaseConnection.commit()
         print("Success! Table created.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def AddColumn(Parameters):
@@ -502,11 +503,11 @@ def AddColumn(Parameters):
         databaseConnection.commit()
         print("Success! Column added.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def RemoveColumn(Parameters):
@@ -519,11 +520,11 @@ def RemoveColumn(Parameters):
         databaseConnection.commit()
         print("Success! Column removed.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def RenameColumn(Parameters):
@@ -537,11 +538,11 @@ def RenameColumn(Parameters):
         databaseConnection.commit()
         print("Success! Column renamed.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def RenameTable(Parameters):
@@ -554,11 +555,11 @@ def RenameTable(Parameters):
         databaseConnection.commit()
         print("Success! Table renamed.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def DropTable(Parameters):
@@ -573,11 +574,11 @@ def DropTable(Parameters):
         databaseConnection.commit()
         print("Success! Table dropped.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def TruncateTable(Parameters):
@@ -592,11 +593,11 @@ def TruncateTable(Parameters):
         databaseConnection.commit()
         print("Success! Table truncated.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def CreateFunction(Path):
@@ -607,8 +608,8 @@ def CreateFunction(Path):
         databaseConnection.commit()
         print("Success! Function created.")
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def RenameFunction(Parameters):
@@ -623,11 +624,11 @@ def RenameFunction(Parameters):
         databaseConnection.commit()
         print("Success! Function renamed.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def DropFunction(Parameters):
@@ -641,11 +642,11 @@ def DropFunction(Parameters):
         databaseConnection.commit()
         print("Success! Function dropped.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def CreateIndex(Parameters):
@@ -658,11 +659,11 @@ def CreateIndex(Parameters):
         theCursor.execute(theStatement)
         databaseConnection.commit()
         print("Success! Index created.")
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def RenameIndex(Parameters):
@@ -675,11 +676,11 @@ def RenameIndex(Parameters):
         databaseConnection.commit()
         print("Success! Index renamed.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def DropIndex(Parameters):
@@ -694,11 +695,11 @@ def DropIndex(Parameters):
         databaseConnection.commit()
         print("Success! Index dropped.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def Select(Parameters):
@@ -720,11 +721,11 @@ def Select(Parameters):
                 theRow = theRow + str(eachValue) + " | "
             print(theRow)
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def Insert(Parameters):
@@ -738,11 +739,11 @@ def Insert(Parameters):
         databaseConnection.commit()
         print("Success! Values inserted.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def Update(Parameters):
@@ -758,11 +759,11 @@ def Update(Parameters):
         databaseConnection.commit()
         print("Success! Values updated.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 def Delete(Parameters):
@@ -776,11 +777,11 @@ def Delete(Parameters):
         databaseConnection.commit()
         print("Success! Values deleted.")
         typeCommand()
-    except IndexError:
-        print("Error: invalid amount of parameters. Please, try again.")
+    except IndexError as theError:
+        print("Error: invalid amount of parameters. Please, try again. \n" + str(theError))
         typeCommand()
-    except psycopg2.ProgrammingError:
-        print("\nError: invalid data entered. Please, try again.")
+    except psycopg2.DatabaseError as theError:
+        print("\nError: invalid data entered. Please, try again. \n" + str(theError))
         typeCommand()
 
 fuctionDict = {'CreateTable':CreateTable, 'Update':Update, 'Select':Select, 'Insert':Insert, 'Delete':Delete,
@@ -815,8 +816,8 @@ def chooseFromMainMenu():
                 '2': chooseFromDMLMenu,
                 '3': typeCommand
             }[theInput]()
-        except KeyError:
-            print("\nError: invalid option. Please, try again.")
+        except KeyError as theError:
+            print("\nError: invalid option. Please, try again. \n" + str(theError))
             chooseFromMainMenu()
 
 connectToDatabase()
